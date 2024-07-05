@@ -1,0 +1,57 @@
+{%- extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Our Products
+{% endblock %}
+
+
+
+{% block content %}
+<!-- Since we are using a loop, no need for [][] -->
+
+<!--
+{% for rocket in rockets %}
+<h1>Rocket No.: {{ rocket[0] }}</h1>
+<p>Launch Date: {{ rocket[1] }}</p>
+<p>Destination: {{ rocket[2] }}</p>
+<p>Extra Comments: {{ rocket[3] }}</p>
+<p>Active: {{ rocket[4] }}</p>
+{% endfor %}
+-->
+<header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Products in Review</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Make sure these products are good to sell</p>
+                </div>
+            </div>
+        </header>
+
+<div class="container mt-3">
+    <div class="row justify-content-between">
+        <div class="card-deck ">
+
+            {% for product in products %}
+                {% if product %}
+
+                    <div class="card mb-4" style="min-width: 18rem; max-width: 18rem;">
+                        <img class="card-img-top" src="{{ url_for('static', filename='review/' + product.image) }}" alt="{{ product[2] }}">
+                        <div class="card-body">
+                            <!-- <h5 class="card-title">Product ID: {{ product.id }}</h5> -->
+                            <h5 class="card-title">Product Name: {{ product.name }}</h5>
+                            <p class="card-text">Price: ${{ product.price }}</p>
+                            <p class="card-text">Description: {{ product.description }}</p>
+                            <p class="card-text">Status: {{ product.show_status() }}</p>
+
+                        </div> 
+
+                </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
