@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+
+<div class="container">
+    <div class="jumbotron" style="margin-top: 10px; margin-bottom: 10px">
+        {% if display_name %}
+            <h1 class="display-4">Welcome {{ display_name }}!</h1>
+        {% else %}
+            <h1 class="display-4">Welcome to the Marine Merchandise shop!</h1>
+        {% endif %}
+      </div>
+</div>
+
+        <!-- Services-->
+        <section class="page-section" id="services">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Popular Items</h2>
+                    <h3 class="section-subheading text-muted">Check out some of our popular items!</h3>
+                </div>
+        <hr class="my-4">
+                <div class="row text-center">
+                    
+                    {% for product in products %}
+                        {% if product %}
+
+                            <div class="col-md-4">
+                                <span class="fa-stack fa-4x">
+                                    <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                                    <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <div class="col-md-4">
+                                    <span class="fa-stack fa-4x">
+                                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                                        <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                    <div class="card mb-4" style="min-width: 18rem; max-width: 18rem;">
+                                        <img class="card-img-top" src="{{ url_for('static', filename='products/' + product.image) }}" alt="{{ product[2] }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ product.name }}</h5>
+                                            <p class="card-text">{{ product.description }}</p>
+                                            <p class="card-text">${{ product.price }}</p>
+                                            <p class="card-text">Status: {{ product.stock }}</p>
+                                        </div> 
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
+            </div>
+            <p class="text-center">
+                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/products" >View All Products</a>
+        </section>
+
+
+
+{% endblock %}
